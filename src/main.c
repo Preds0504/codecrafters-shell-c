@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
 int main(int argc, char *argv[]) {
   // Flush after every printf
@@ -11,12 +11,11 @@ int main(int argc, char *argv[]) {
 
   // Wait for user input
   char input[100];
+  //When Using fgets there is a newline character at the end when reading
+  //Will Need to remove so that it can print properly
   fgets(input, 100, stdin);
-
-  //First fix
-    /* Remove trailing newline, if present */
-    size_t len = strcspn(input, "\r\n");  // first '\r' or '\n'
-    input[len] = '\0';
+  // Remove the trailing newline
+  input[strlen(input) - 1] = '\0';
 
 
   //TODO
