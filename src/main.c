@@ -12,8 +12,8 @@ int main(int argc, char *argv[]) {
   // Wait for user input
   char input[100];
   fgets(input, 100, stdin);
-
-  //Prints for when the command is invalid for now all commands are invalid
-  printf("%s: command not found\n", input);
+  //TODO
+  //Prints for when the command is invalid for now, all commands are invalid
+  printf("%s: command not found", input);
   return 0;
 }
