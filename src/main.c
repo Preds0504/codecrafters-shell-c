@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
         //Prints for when the command is invalid for now, all commands are invalid
         if (strcmp(input, "exit 0") == 0 ) {
             exit(0);
-        }
+        } else if (strncmp(input, "echo", 4) == 0 )
         printf("%s: command not found", input);
         printf("\n");
     }
