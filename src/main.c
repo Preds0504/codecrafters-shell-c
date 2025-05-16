@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
         // Remove the trailing newline
         input[strlen(input) - 1] = '\0';
         //Prints for when the command is invalid for now, all commands are invalid
-        if (strcmp(input, "exit") == 0 ) {
+        if (strcmp(input, "exit: 0") == 0 ) {
             break;
         }
         printf("%s: command not found", input);
