@@ -24,12 +24,14 @@ int main(int argc, char *argv[]) {
         if (strcmp(input, "exit 0") == 0 ) {
             exit(0);
         } else if (strncmp(input, "echo", 4) == 0 ) {
-            printf(input);
+            char message[100];
+            strncpy(message, input, 4);
+            printf(message);
         } else {
+            //Last case is the command doesn't exist
             printf("%s: command not found", input);
-            printf("\n");
         }
-        
+        printf("\n");
     }
 
     
