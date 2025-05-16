@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
         input[strlen(input) - 1] = '\0';
         //Prints for when the command is invalid for now, all commands are invalid
         if (strcmp(input, "exit: 0") == 0 ) {
-            break;
+            exit(0);
         }
         printf("%s: command not found", input);
         printf("\n");
