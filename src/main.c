@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
         // Remove the trailing newline
         input[strlen(input) - 1] = '\0';
         //Get the command
-        char *first = strtok(line, " \t");
+        char *first = strtok(input, " \t");
         //Evaluates the command
         if (strcmp(first, "exit") == 0 ) {
             exit(0);
@@ -27,11 +27,11 @@ int main(int argc, char *argv[]) {
             printf("%s", input + 5);
         } else if (strcmp(first, "type") == 0) {
             char *second = strtok(NULL, " \t");  
-            if () {
+            // if () {
 
-            } else {
-                printf("%s: command not found", input);
-            }
+            // } else {
+            //     printf("%s: command not found", input);
+            // }
         } else {
             //Last case is the command doesn't exist
             printf("%s: command not found", input);
