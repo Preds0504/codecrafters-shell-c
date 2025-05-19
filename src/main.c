@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
             if (is_command(second) >= 0) {
                 printf("%s is a shell builtin", second);
             } else {
-                printf("%s: command not found", second);
+                printf("%s: not found", second);
             }
         } else {
             //Last case is the command doesn't exist
