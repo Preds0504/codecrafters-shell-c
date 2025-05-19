@@ -11,8 +11,6 @@ int main(int argc, char *argv[]) {
     while(true) {
         //Prompt for input
         printf("$ ");
-        
-
         // Wait for user input
         char input[100];
         //When Using fgets there is a newline character at the end when reading
@@ -24,8 +22,7 @@ int main(int argc, char *argv[]) {
         if (strcmp(input, "exit 0") == 0 ) {
             exit(0);
         } else if (strncmp(input, "echo", 4) == 0 ) {
-            input[strcspn(input, "\r\n")] = '\0';
-            printf("%s\n", input + 5);
+            printf("%s", input + 5);
         } else {
             //Last case is the command doesn't exist
             printf("%s: command not found", input);
