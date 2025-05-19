@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
             printf("%s", input + 5);
         } else if (strcmp(first, "type") == 0) {
             char *second = strtok(NULL, " \t");  
-            if (is_command(second)) {
+            if (is_command(second) >= 0) {
                 printf("%s is a shell builtin", second);
             } else {
                 printf("%s: command not found", second);
