@@ -2,12 +2,25 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**Size of list of commands */
+#define CMD_LIST_SIZE 3
+/**List of Commands*/
+char *cmd_list[] = {"echo", "exit", "type"};
+/**Will check for valid commands*/
+int is_command(char *command) {
+  for (int i = 0; i < CMD_LIST_SIZE; i++) {
+    if (strcmp(command, cmd_list[i]) == 0) {
+        return i;
+    } else if (strcmp(command, cmd_list[i]) < 0) {
+        return -1;
+    }
+  }
+  return -1;
+}
+
 int main(int argc, char *argv[]) {  
     // Flush after every printf
     setbuf(stdout, NULL);
-
-
-
     while(true) {
         //Prompt for input
         printf("$ ");
@@ -27,11 +40,11 @@ int main(int argc, char *argv[]) {
             printf("%s", input + 5);
         } else if (strcmp(first, "type") == 0) {
             char *second = strtok(NULL, " \t");  
-            // if () {
-
-            // } else {
-            //     printf("%s: command not found", input);
-            // }
+            if (is_command(second)) {
+                printf("%s is a shell builtin", second);
+            } else {
+                printf("%s: command not found", second);
+            }
         } else {
             //Last case is the command doesn't exist
             printf("%s: command not found", input);
