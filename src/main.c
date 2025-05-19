@@ -18,11 +18,20 @@ int main(int argc, char *argv[]) {
         fgets(input, 100, stdin);
         // Remove the trailing newline
         input[strlen(input) - 1] = '\0';
-        //Prints for when the command is invalid for now, all commands are invalid
-        if (strcmp(input, "exit 0") == 0 ) {
+        //Get the command
+        char *first = strtok(line, " \t");
+        //Evaluates the command
+        if (strcmp(first, "exit") == 0 ) {
             exit(0);
-        } else if (strncmp(input, "echo", 4) == 0 ) {
+        } else if (strcmp(first, "echo") == 0 ) {
             printf("%s", input + 5);
+        } else if (strcmp(first, "type") == 0) {
+            char *second = strtok(NULL, " \t");  
+            if () {
+
+            } else {
+                printf("%s: command not found", input);
+            }
         } else {
             //Last case is the command doesn't exist
             printf("%s: command not found", input);
