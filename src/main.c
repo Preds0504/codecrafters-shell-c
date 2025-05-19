@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
         if (strcmp(input, "exit 0") == 0 ) {
             exit(0);
         } else if (strncmp(input, "echo", 4) == 0 ) {
+            input[strcspn(input, "\r\n")] = '\0';
             printf("%s\n", input + 5);
         } else {
             //Last case is the command doesn't exist
