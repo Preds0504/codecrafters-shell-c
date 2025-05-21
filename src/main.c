@@ -25,8 +25,8 @@ int handle_type (const char *command) {
         printf("%s is a shell builtin", command);
         return 0;
     }
-    char *path = getenv('PATH');
-     if (!path_env) { 
+    char *path = getenv("PATH");
+     if (!path) { 
         printf("%s: not found\n", name); 
         return 0; 
     }
