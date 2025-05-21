@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
         } else if (strcmp(first, "type") == 0) {
             //handling when user wants type
             char *second = strtok(NULL, " \t");
-            second[strlen(second) - 1] = '\0';
+            // second[strlen(second) - 1] = '\0';
             handle_type(second);
         } else {
             //Last case is the command doesn't exist
