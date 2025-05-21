@@ -7,7 +7,7 @@
 /**List of Commands*/
 char *cmd_list[] = {"echo", "exit", "type"};
 /**Will check for valid commands*/
-int is_command(char *command) {
+int is_builtIn(const char *command) {
   for (int i = 0; i < CMD_LIST_SIZE; i++) {
     if (strcmp(command, cmd_list[i]) == 0) {
         return i;
@@ -16,6 +16,22 @@ int is_command(char *command) {
     }
   }
   return -1;
+}
+
+int handle_type (const char *command) {
+     
+    //If builtin just print it's builtin  
+    if (is_command(command) >= 0) {
+        printf("%s is a shell builtin", command);
+        return 0;
+    }
+    char *path = getenv('PATH');
+     if (!path_env) { 
+        printf("%s: not found\n", name); 
+        return 0; 
+    }
+    return 0;
+
 }
 
 int main(int argc, char *argv[]) {  
@@ -37,14 +53,11 @@ int main(int argc, char *argv[]) {
         if (strcmp(first, "exit") == 0 ) {
             exit(0);
         } else if (strcmp(first, "echo") == 0 ) {
+            //Just prints the command
             printf("%s", input + 5);
         } else if (strcmp(first, "type") == 0) {
-            char *second = strtok(NULL, " \t");  
-            if (is_command(second) >= 0) {
-                printf("%s is a shell builtin", second);
-            } else {
-                printf("%s: not found", second);
-            }
+            char *second = strtok(NULL, " \t");
+            handle_type();
         } else {
             //Last case is the command doesn't exist
             printf("%s: command not found", input);
