@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
         input[strlen(input) - 1] = '\0';
         //Parse through all words
         int argc;
-        char **argv = split_line(line, &argc);
+        char **argv = split_line(input, &argc);
         if (argc == 0) { 
             free(argv); 
         }
