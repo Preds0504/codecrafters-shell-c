@@ -44,7 +44,7 @@ int handle_type (const char *command) {
         //If it is found it will print its first appearance and stop
         if (access(full, X_OK) == 0) {
             printf("%s is %s\n", command, full);
-            break;
+            // break;
         }
     } 
     return 0;
