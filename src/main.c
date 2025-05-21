@@ -43,7 +43,7 @@ int handle_type (const char *command) {
         snprintf(full, sizeof(full), "%s/%s", dir, command);
         //If it is found it will print its first appearance and stop
         if (access(full, X_OK) == 0) {
-            full[strlen(input) - 1] = '\0';
+            full[strlen(full) - 1] = '\0';
             printf("%s is %s", command, full);
             break;
         }
@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
         } else if (strcmp(first, "type") == 0) {
             //handling when user wants type
             char *second = strtok(NULL, " \t");
-            second[strlen(input) - 1] = '\0';
+            second[strlen(second) - 1] = '\0';
             handle_type(second);
         } else {
             //Last case is the command doesn't exist
