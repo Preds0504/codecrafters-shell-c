@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
+/**Maximum possible path legnth*/
+#define MAX_PATH_LEN 1024
 /**Size of list of commands */
 #define CMD_LIST_SIZE 3
 /**List of Commands*/
@@ -30,6 +33,15 @@ int handle_type (const char *command) {
         printf("%s: not found\n", command); 
         return 0; 
     }
+    char buf[strlen(path) + 1];
+    strcpy(buf, path);
+    for (char *dir = strtok(buf, ":"); dir; dir = strtok(NULL, ":")) {
+        char *full[MAX_PATH_LEN];
+        snprintf(full, sizeof(full), "%s/%s", dir, name);
+        if (access(full, X_OK) == 0) {
+            printf("%s is %s\n", command, full);
+        }
+    } 
     return 0;
 
 }
@@ -56,6 +68,7 @@ int main(int argc, char *argv[]) {
             //Just prints the command
             printf("%s", input + 5);
         } else if (strcmp(first, "type") == 0) {
+            //handling when user wants type
             char *second = strtok(NULL, " \t");
             handle_type(second);
         } else {
