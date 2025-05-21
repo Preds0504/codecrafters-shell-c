@@ -43,7 +43,7 @@ int handle_type (const char *command) {
         snprintf(full, sizeof(full), "%s/%s", dir, command);
         //If it is found it will print its first appearance and stop
         if (access(full, X_OK) == 0) {
-            printf("%s is %s\n", command, full);
+            printf("%s is %s", command, full);
             break;
         }
     } 
