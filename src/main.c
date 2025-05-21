@@ -40,9 +40,11 @@ int handle_type (const char *command) {
     //loop through all directories having the : be the delimiter
     for (char *dir = strtok(buf, ":"); dir; dir = strtok(NULL, ":")) {
         char full[MAX_PATH_LEN];
+        //This builds the dir for the access to be called
         snprintf(full, sizeof(full), "%s/%s", dir, command);
+        //If it is found it will print its first appearance and stop
         if (access(full, X_OK) == 0) {
-            printf("%s is %s\n", command, full);
+            printf("%s is %s", command, full);
             break;
         }
     } 
