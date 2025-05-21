@@ -21,13 +21,13 @@ int is_builtIn(const char *command) {
 int handle_type (const char *command) {
      
     //If builtin just print it's builtin  
-    if (is_command(command) >= 0) {
+    if (is_builtIn(command) >= 0) {
         printf("%s is a shell builtin", command);
         return 0;
     }
     char *path = getenv("PATH");
      if (!path) { 
-        printf("%s: not found\n", name); 
+        printf("%s: not found\n", command); 
         return 0; 
     }
     return 0;
@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
             printf("%s", input + 5);
         } else if (strcmp(first, "type") == 0) {
             char *second = strtok(NULL, " \t");
-            handle_type();
+            handle_type(second);
         } else {
             //Last case is the command doesn't exist
             printf("%s: command not found", input);
