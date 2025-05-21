@@ -36,8 +36,8 @@ int handle_type (const char *command) {
     char buf[strlen(path) + 1];
     strcpy(buf, path);
     for (char *dir = strtok(buf, ":"); dir; dir = strtok(NULL, ":")) {
-        char *full[MAX_PATH_LEN];
-        snprintf(full, sizeof(full), "%s/%s", dir, name);
+        char full[MAX_PATH_LEN];
+        snprintf(full, sizeof(full), "%s/%s", dir, command);
         if (access(full, X_OK) == 0) {
             printf("%s is %s\n", command, full);
         }
