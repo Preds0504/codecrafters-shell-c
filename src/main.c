@@ -31,7 +31,7 @@ int handle_type (const char *command) {
     //Get the path name
     char *path = getenv("PATH");
      if (!path) { 
-        printf("%s: not found\n", command); 
+        printf("%s: not found", command); 
         return 0; 
     }
     //Copy the path name
