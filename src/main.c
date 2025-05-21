@@ -28,13 +28,16 @@ int handle_type (const char *command) {
         printf("%s is a shell builtin", command);
         return 0;
     }
+    //Get the path name
     char *path = getenv("PATH");
      if (!path) { 
         printf("%s: not found\n", command); 
         return 0; 
     }
+    //Copy the path name
     char buf[strlen(path) + 1];
     strcpy(buf, path);
+    //loop through all directories having the : be the delimiter
     for (char *dir = strtok(buf, ":"); dir; dir = strtok(NULL, ":")) {
         char full[MAX_PATH_LEN];
         snprintf(full, sizeof(full), "%s/%s", dir, command);
@@ -43,7 +46,6 @@ int handle_type (const char *command) {
         }
     } 
     return 0;
-
 }
 
 int main(int argc, char *argv[]) {  
