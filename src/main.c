@@ -9,6 +9,29 @@
 #define CMD_LIST_SIZE 3
 /**List of Commands*/
 char *cmd_list[] = {"echo", "exit", "type"};
+
+/**  Returns a NULL-terminated argv array.argc_out gets the count (not including the NULL).  */
+char **split_line(char *line, int *argc_out)
+{
+    size_t cap = 4;                 // start small, grow as needed
+    size_t len = 0;
+    char **argv = malloc(cap * sizeof *argv);
+    if (!argv) { perror("malloc"); exit(1); }
+
+    char *tok = strtok(line, " \t\r\n");
+    while (tok) {
+        if (len + 2 > cap) {        // +2 because we add tok and final NULL
+            cap *= 2;
+            argv = realloc(argv, cap * sizeof *argv);
+            if (!argv) { perror("realloc"); exit(1); }
+        }
+        argv[len++] = tok;          // store pointer to token
+        tok = strtok(NULL, " \t\r\n");
+    }
+    argv[len] = NULL;               // execvp expects this
+    *argc_out = (int)len;
+    return argv;
+}
 /**Will check for valid commands*/
 int is_builtIn(const char *command) {
   for (int i = 0; i < CMD_LIST_SIZE; i++) {
@@ -20,7 +43,7 @@ int is_builtIn(const char *command) {
   }
   return -1;
 }
-
+/**Handles the type command */
 int handle_type (const char *command) {
     //If builtin just print it's builtin  
     if (is_builtIn(command) >= 0) {
@@ -60,8 +83,14 @@ int main(int argc, char *argv[]) {
         fgets(input, 100, stdin);
         // Remove the trailing newline
         input[strlen(input) - 1] = '\0';
+        //Parse through all words
+        int argc;
+        char **argv = split_line(line, &argc);
+        if (argc == 0) { 
+            free(argv); 
+        }
         //Get the command
-        char *first = strtok(input, " \t");
+        char *first = argv[0];
         //Evaluates the command
         if (strcmp(first, "exit") == 0 ) {
             exit(0);
@@ -70,10 +99,12 @@ int main(int argc, char *argv[]) {
             printf("%s", input + 5);
         } else if (strcmp(first, "type") == 0) {
             //handling when user wants type
-            char *second = strtok(NULL, " \t");
+            char *second = argv[1];
             handle_type(second);
         } else {
-            //Last case is the command doesn't exist
+            //Check for where the command exists
+            //TODO
+            
             printf("%s: command not found", input);
         }
         printf("\n");
