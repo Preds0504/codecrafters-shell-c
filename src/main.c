@@ -98,7 +98,13 @@ int main(int argc, char *argv[]) {
             exit(0);
         } else if (strcmp(first, "echo") == 0 ) {
             //Just prints the command
-            printf("%s", input + 5);
+            for (int i = 1; i < argc; i++) {
+                printf("%s", argv[i]);
+                if (i < argc - 1) {
+                    printf(" ");
+                }
+            }
+    printf("\n");
         } else if (strcmp(first, "type") == 0) {
             //handling when user wants type
             char *second = argv[1];
