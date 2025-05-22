@@ -103,8 +103,21 @@ int main(int argc, char *argv[]) {
             handle_type(second);
         } else {
             //Check for where the command exists
-            //TODO
-            
+            pid_t pid = fork();
+            if (pid < 0) {
+                perror("fork");
+                exit(1);
+            } else if (pid == 0) {
+                // Child process: try to run the external command
+                execvp(argv[0], argv);
+                // If execvp returns, it failed
+                perror(argv[0]);
+                exit(1);
+            } else {
+                // Parent process: wait for child to finish
+                int status;
+                waitpid(pid, &status, 0);
+            }
             printf("%s: command not found", input);
         }
         printf("\n");
