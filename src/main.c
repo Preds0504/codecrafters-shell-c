@@ -113,14 +113,14 @@ int main(int argc, char *argv[]) {
                 // Child process: try to run the external command
                 execvp(argv[0], argv);
                 // If execvp returns, it failed
-                perror(argv[0]);
+                printf("%s: command not found", input);
                 exit(1);
             } else {
                 // Parent process: wait for child to finish
                 int status;
                 waitpid(pid, &status, 0);
             }
-            printf("%s: command not found", input);
+            
         }
         printf("\n");
     }
