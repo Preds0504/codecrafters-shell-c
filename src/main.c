@@ -49,7 +49,7 @@ int is_builtIn(const char *command) {
 int handle_type (const char *command) {
     //If builtin just print it's builtin  
     if (is_builtIn(command) >= 0) {
-        printf("%s is a shell builtin", command);
+        printf("%s is a shell builtin\n", command);
         return 0;
     }
     //Get the path name
@@ -64,11 +64,11 @@ int handle_type (const char *command) {
         snprintf(full, sizeof(full), "%s/%s", dir, command);
         //If it is found it will print its first appearance and stop
         if (access(full, X_OK) == 0) {
-            printf("%s is %s", command, full);
+            printf("%s is %s\n", command, full);
             return 0;
         }
     } 
-    printf("%s: not found", command);
+    printf("%s: not found\n", command);
     return 0;
 }
 
@@ -113,7 +113,7 @@ int main(int argc, char *argv[]) {
                 // Child process: try to run the external command
                 execvp(argv[0], argv);
                 // If execvp returns, it failed
-                printf("%s: command not found", input);
+                printf("%s: command not found\n", input);
                 exit(1);
             } else {
                 // Parent process: wait for child to finish
@@ -122,7 +122,7 @@ int main(int argc, char *argv[]) {
             }
             
         }
-        printf("\n");
+        // printf("\n");
     }
 
     
